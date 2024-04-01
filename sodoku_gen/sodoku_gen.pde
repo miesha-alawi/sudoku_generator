@@ -25,6 +25,7 @@ void draw() {
 }
 
 boolean solve(int[][] grid, int r, int c) {
+  boolean verdict = false;
   if (r == rows-1 && c == cols) {
     return true;
   }
@@ -37,17 +38,17 @@ boolean solve(int[][] grid, int r, int c) {
   }
 
   for (int n = 1; n < 10; n++) {
-    if (isvalid(grid, r, c, n)) {
+    if (isvalid(grid, c, r, n)) {
       grid[c][r] = n;
       if (solve(grid, r, c+1)) {
-        return true;
+        verdict = true;
       } else {
         grid[c][r] = 0;
-        return false;
+        verdict = false;
       }
     }
   }
-  return false;
+  return verdict;
 }
 
 boolean isvalid(int[][] g, int c, int r, int n) {
